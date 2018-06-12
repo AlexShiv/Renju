@@ -33,25 +33,44 @@ public class Controller {
 
     public AI ai = new AI(2, 1);
 
+    public AI ai2 = new AI(1, 2);
+
+    public static int mode = 0;
+
     @FXML
     void initialize() {
 
         mover = new Mover();
-
         gridpane.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
             int y = (int) (event.getX() / 50);
             int x = (int) (event.getY() / 50);
             if (mover.canPoint(x, y) == true) {
-                mover.point(x, y);
-                addImage(Mover.player, x, y);
-                mover.winGame(x, y);
+                if (mode == 0) {
+                    mover.point(x, y);
+                    addImage(Mover.player, x, y);
+                    mover.winGame(x, y);
 
-                mover.changePlayer();
-                Point p = ai.moveAI();
-                addImage(ai.my, p.x, p.y);
+                    mover.changePlayer();
+                } else if (mode == 1) {
+                    mover.point(x, y);
+                    addImage(Mover.player, x, y);
+                    mover.winGame(x, y);
+                    mover.changePlayer();
+
+                    Point p = ai.moveAI();
+                    addImage(ai.my, p.x, p.y);
+                } else if (mode == 3) {
+
+                    Point p = ai.moveAI();
+                    addImage(ai.my, p.x, p.y);
+
+                    p = ai2.moveAI();
+                    addImage(ai2.my, p.x, p.y);
+
+                }
                 for (int i = 0; i < Mover.board.length; i++) {
                     for (int j = 0; j < Mover.board[i].length; j++) {
-                        System.out.print(Mover.board[i][j] +" ");
+                        System.out.print(Mover.board[i][j] + " ");
                     }
                     System.out.println();
                 }

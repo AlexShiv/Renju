@@ -268,59 +268,119 @@ public class AI {
     public Point moveAI() {
         analizeBoard();
         // ищем наши четверки
-        ArrayList<SuperPosition> listPos = getPosWithNumber(my, 4);
-        if (listPos.size() != 0) { // если они есть, то ходим и по возможности побеждаем
-            findAndMove(enemy, listPos, 4);
-        }
-        listPos = getPosWithNumber(enemy, 4);
-        if (listPos.size() != 0) {
-            Point a = findAndMove(my, listPos, 4);
-            if (a != null) {
-                mover.changePlayer();
-                return a;
+        if (Controller.mode != 3) {
+            ArrayList<SuperPosition> listPos = getPosWithNumber(my, 4);
+            if (listPos.size() != 0) { // если они есть, то ходим и по возможности побеждаем
+                findAndMove(enemy, listPos, 4);
             }
-        }
-        listPos = getPosWithNumber(enemy, 3);
-        if (listPos.size() != 0) {
-            Point a = findAndMove(my, listPos, 3);
-            if (a != null) {
-                mover.changePlayer();
-                return a;
+            listPos = getPosWithNumber(enemy, 4);
+            if (listPos.size() != 0) {
+                Point a = findAndMove(my, listPos, 4);
+                if (a != null) {
+                    mover.changePlayer();
+                    return a;
+                }
             }
-        }
-        listPos = getPosWithNumber(my, 3);
-        if (listPos.size() != 0) {
-            Point a = findAndMove(enemy, listPos, 3);
-            if (a != null) {
-                mover.changePlayer();
-                return a;
+            listPos = getPosWithNumber(enemy, 3);
+            if (listPos.size() != 0) {
+                Point a = findAndMove(my, listPos, 3);
+                if (a != null) {
+                    mover.changePlayer();
+                    return a;
+                }
             }
-        }
-        listPos = getPosWithNumber(my, 2);
-        if (listPos.size() != 0) {
-            Point a = findAndMove(enemy, listPos, 2);
-            if (a != null) {
-                mover.changePlayer();
-                return a;
+            listPos = getPosWithNumber(my, 3);
+            if (listPos.size() != 0) {
+                Point a = findAndMove(enemy, listPos, 3);
+                if (a != null) {
+                    mover.changePlayer();
+                    return a;
+                }
             }
-        }
-        listPos = getPosWithNumber(my, 1);
-        if (listPos.size() != 0) {
-            Point a = findAndMove(enemy, listPos, 1);
-            if (a != null) {
-                mover.changePlayer();
-                return a;
+            listPos = getPosWithNumber(my, 2);
+            if (listPos.size() != 0) {
+                Point a = findAndMove(enemy, listPos, 2);
+                if (a != null) {
+                    mover.changePlayer();
+                    return a;
+                }
             }
+            listPos = getPosWithNumber(my, 1);
+            if (listPos.size() != 0) {
+                Point a = findAndMove(enemy, listPos, 1);
+                if (a != null) {
+                    mover.changePlayer();
+                    return a;
+                }
+            }
+            int a = 2 + (int) (Math.random() * 8);
+            int b = 2 + (int) (Math.random() * 8);
+            System.out.println(a);
+            System.out.println(b);
+            while (mover.canPoint(a, b) == false) {
+                a = 2 + (int) (Math.random() * 7);
+                b = 2 + (int) (Math.random() * 7);
+            }
+            mover.point(a, b);
+            mover.changePlayer();
+            return new Point(a, b);
+        } else {
+            ArrayList<SuperPosition> listPos = getPosWithNumber(enemy, 4);
+            if (listPos.size() != 0) { // если они есть, то ходим и по возможности побеждаем
+                findAndMove(my, listPos, 4);
+            }
+            listPos = getPosWithNumber(my, 4);
+            if (listPos.size() != 0) {
+                Point a = findAndMove(enemy, listPos, 4);
+                if (a != null) {
+                    mover.changePlayer();
+                    return a;
+                }
+            }
+            listPos = getPosWithNumber(my, 3);
+            if (listPos.size() != 0) {
+                Point a = findAndMove(enemy, listPos, 3);
+                if (a != null) {
+                    mover.changePlayer();
+                    return a;
+                }
+            }
+            listPos = getPosWithNumber(enemy, 3);
+            if (listPos.size() != 0) {
+                Point a = findAndMove(my, listPos, 3);
+                if (a != null) {
+                    mover.changePlayer();
+                    return a;
+                }
+            }
+            listPos = getPosWithNumber(enemy, 2);
+            if (listPos.size() != 0) {
+                Point a = findAndMove(my, listPos, 2);
+                if (a != null) {
+                    mover.changePlayer();
+                    return a;
+                }
+            }
+            listPos = getPosWithNumber(enemy, 1);
+            if (listPos.size() != 0) {
+                Point a = findAndMove(my, listPos, 1);
+                if (a != null) {
+                    mover.changePlayer();
+                    return a;
+                }
+            }
+            int a = 2 + (int) (Math.random() * 8);
+            int b = 2 + (int) (Math.random() * 8);
+            System.out.println(a);
+            System.out.println(b);
+            while (mover.canPoint(a, b) == false) {
+                a = 2 + (int) (Math.random() * 7);
+                b = 2 + (int) (Math.random() * 7);
+            }
+            mover.point(a, b);
+            mover.changePlayer();
+            return new Point(a, b);
         }
-        int a = 7 + (int) (Math.random() * 10);
-        int b = 7 + (int) (Math.random() * 10);
-        while (mover.canPoint(a, b) == false) {
-            a = 7 + (int) (Math.random() * 10);
-            b = 7 + (int) (Math.random() * 10);
-        }
-        mover.point(a, b);
-        mover.changePlayer();
-        return new Point(a, b);
 
     }
 
